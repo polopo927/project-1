@@ -37,19 +37,19 @@ const tabsChooseBalcons = (headerSelector, tabSelector, contentSelector, activeC
 		//так как мы уже работаем с классами вырезаем первую точку
 		const tabClass = tabSelector.slice(1);
 		//создаём условие где проверяем куда нажал пользователь и проверяем есть ли у него этот класс
-		if (target && (target.classList.contains(tabClass) || 
-		//проверяем есть ли у родителя этот класс
+		if (target && (target.classList.contains(tabClass) ||
+			//проверяем есть ли у родителя этот класс
 			target.parentNode.classList.contains(tabClass))) {
-				//и если есть то мы перебираем табы с их индексом
-				tabs.forEach((tab, index) => {
-					//если пользователь кликнул по табу который перебирается
-					if (target == tab || target.parentNode == tab) {
-						//скрываем контент
-						hideTabContent();
-						//показываем нажатый таб
-						showTabContent(index);
-					}
-				});
+			//и если есть то мы перебираем табы с их индексом
+			tabs.forEach((tab, index) => {
+				//если пользователь кликнул по табу который перебирается
+				if (target == tab || target.parentNode == tab) {
+					//скрываем контент
+					hideTabContent();
+					//показываем нажатый таб
+					showTabContent(index);
+				}
+			});
 		}
 	});
 };
