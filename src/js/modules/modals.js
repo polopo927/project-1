@@ -5,13 +5,20 @@ const modals = () => {
 	//triggerSelector (например селектор нашей кнопки по которой будем кликать)
 	//modalSelector говорит о том какое модальное окно мы будем открывать
 	//closeSelector (селектор который будет закрывать наше модальное окно например крестик)
-	function bindModal(triggerSelector, modalSelector, closeSelector) {
-		const trigger = document.querySelectorAll(triggerSelector),
-			  modal = document.querySelector(modalSelector),
-			  close = document.querySelector(closeSelector);
+	const bindModal = (triggerSelector, modalSelector, closeSelector) => {
+		const triggers = document.querySelectorAll(triggerSelector);
+		const modal = document.querySelector(modalSelector);
+		const close = document.querySelector(closeSelector);
+		const closeModal = () => {
+			//обращаемся к модалке и скрываем её
+			modal.style.display = 'none';
+			//возвращаем прокрутку страницы
+			document.body.style.overflow = '';
+		}
+
 		//делаем перебор элементво так как используем queryselectorall
-		trigger.forEach(item => {
-			item.addEventListener('click', (event) => {
+		triggers.forEach(trigger => {
+			trigger.addEventListener('click', (event) => {
 				//делаем условие, что если существует событие у элемента, то отменяем стандартную работу браузера для него
 				if (event.target) {
 					event.preventDefault();
@@ -21,27 +28,23 @@ const modals = () => {
 				modal.style.display = 'block';
 				//блокируем прокрутку страницы когда модалка открыта
 				document.body.style.overflow = 'hidden';
-				//если в css присутствуют классы для показы и скрытия, можно использовать их
+				//если в css присутствуют классы для показf и скрытия, можно использовать их
 				//document.body.classList.add('modal-open')
 			});
 		});
 
 		//навешиваем обработчик событий при клике на закрывающий элемент
 		close.addEventListener('click', () => {
-			//обращаемся к модалке и скрываем её
-			modal.style.display = 'none';
-			//возвращаем прокрутку страницы
-			document.body.style.overflow = '';
+			closeModal();
+
 			//если в css присутствуют классы для показы и скрытия, можно использовать их
 			//document.body.classList.remove('modal-open')
 		});
 		//делаем функцию закрытия модалки при нажатии на область которая к ней не относится
 		modal.addEventListener('click', (event) => {
 			if (event.target === modal) {
-				//обращаемся к модалке и скрываем её
-				modal.style.display = 'none';
-				//возвращаем прокрутку страницы
-				document.body.style.overflow = '';
+				closeModal();
+
 				//если в css присутствуют классы для показы и скрытия, можно использовать их
 				//document.body.classList.remove('modal-open')
 			}
@@ -50,7 +53,7 @@ const modals = () => {
 
 	//функция для открытия модалки, если пользователь находится на сайте определённое время
 	//передаём селектор модалки и время через которое откроется модалка
-	function showModalByTime(selector, time) {
+	const showModalByTime = (selector, time) => {
 		setTimeout(() => {
 			document.querySelector(selector).style.display = 'block';
 			//блокируем прокрутку страницы когда модалка открыта
