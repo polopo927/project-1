@@ -28,14 +28,10 @@ const tabsChooseBalcons = ({ headerSelector, tabSelector, contentSelector, activ
 		tabs[i].classList.add(activeClass);
 	}
 
-	hideTabContent();
-	showTabContent();
-
-	//так как мы уже работаем с классами вырезаем первую точку
-	const tabClass = tabSelector.slice(1);
-	//вешаем обработчик событий на область в которой находятся все табы
-	header.addEventListener('click', event => {
+	const checkClass = (event) => {
 		const target = event.target;
+		//так как мы уже работаем с классами вырезаем первую точку
+		const tabClass = tabSelector.slice(1);
 		//создаём условие где проверяем куда нажал пользователь и проверяем есть ли у него этот класс
 		if (target && (target.classList.contains(tabClass) ||
 			//проверяем есть ли у родителя этот класс
@@ -51,18 +47,19 @@ const tabsChooseBalcons = ({ headerSelector, tabSelector, contentSelector, activ
 				}
 			});
 		}
-	});
+	}
+
+	hideTabContent();
+	showTabContent();
+
+
+
+	//вешаем обработчик событий на область в которой находятся все табы и вызываем функцию проверки
+	header.addEventListener('click', checkClass);
 
 	header.addEventListener('keydown', event => {
 		if (event.key === 'Enter') {
-			if (event.target && (event.target.classList.contains(tabClass) || event.target.parentNode.classList.contains(tabClass))) {
-				tabs.forEach((tab, index) => {
-					if (event.target == tab || event.target.parentNode == tab) {
-						hideTabContent();
-						showTabContent(index);
-					}
-				});
-			}
+			checkClass(event);
 		}
 	});
 };
