@@ -52,10 +52,10 @@ const formsFeedback = () => {
 			postData('https://simple-server-cumz.onrender.com/api/data', jsonData)
 				.then(result => {
 					console.log(result)
-					statusMessage.textContent = message.success
+					statusMessage.textContent = messageFromUser.success
 				})
 				.catch(() => {
-					statusMessage.textContent = message.fail
+					statusMessage.textContent = messageFromUser.fail
 				})
 				.finally(() => {
 					clearInputs();
@@ -67,4 +67,4 @@ const formsFeedback = () => {
 	})
 }
 
-export default forms
+export default formsFeedback
