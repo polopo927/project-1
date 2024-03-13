@@ -4,6 +4,8 @@ import './slider';
 import modals from './modules/modals';
 //импортируем табы как функцию
 import tabsChooseBalcons from './modules/tabs';
+//импортируем формы
+import formsFeedback from './modules/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
 	//обязательно вызываем функцию для её работы
@@ -20,4 +22,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		contentSelector: '.decoration_content > div > div',
 		activeClass: 'after_click'
 	});
+	formsFeedback();
 });
