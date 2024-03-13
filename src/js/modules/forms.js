@@ -1,22 +1,24 @@
 const formsFeedback = () => {
 	const forms = document.querySelectorAll('form');
 	const inputs = document.querySelectorAll('input');
+	const phoneNumberInputs = document.querySelectorAll('input[name="user_phone"]')
 	const messageFromUser = {
 		loading: 'Загрузка...',
 		success: 'Спасибо, скоро с Вами свяжутся',
-		fail: 'Что-то пошло не так'
-	}
+		failure: 'Что-то пошло не так'
+	};
 
 	const postData = async (url, data) => {
-		document.querySelector('.status').textContent = messageFromUser.loading
+		document.querySelector('.status').textContent = messageFromUser.loading;
 		//Метод fetch() в JavaScript предоставляет возможность асинхронно отправлять сетевые запросы и получать ответы.
 		let result = await fetch(url, {
 			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
 			body: data
 		});
 
 		return await result.text();
-	}
+	};
 
 	//создаём функцию очистки инпутов
 	const clearInputs = () => {
@@ -24,14 +26,20 @@ const formsFeedback = () => {
 		inputs.forEach(input => {
 			//устанавливаем пустое значение для каждого инпута, это очистит его
 			input.value = '';
-		})
-	}
+		});
+	};
+
+	phoneNumberInputs.forEach(input => {
+		input.addEventListener('input', () => {
+			input.value = input.value.replace(/\D/g, '');
+		});
+	});
 
 	//перебираем массив с формами
 	forms.forEach(form => {
 		//навешиваем обработчик событий с подтверждением submit
 		//event здесь нужен для того чтобы отключить перезагрузку страницы при отправке формы
-		form.addEventListener('submit', (event) => {
+		form.addEventListener('submit', event => {
 			//чтобы отключить перезагрузку страницы при отправке формы, отключаем дэфолтную работу браузера для события
 			event.preventDefault();
 
@@ -43,19 +51,21 @@ const formsFeedback = () => {
 			//помещаем блок на страницу, так как сейчас она находится только в js 
 			form.appendChild(statusMessage);
 
-			const formData = {};
-			inputs.forEach(input => {
-				formData[input.name] = input.value;
-			})
-			const jsonData = JSON.stringify(formData)
-
+			const formData = new FormData(form)
+			const jsonObject = {};
+			formData.forEach((value, key) => {
+				jsonObject[key] = value;
+			});
+			const jsonData = JSON.stringify(jsonObject);
+			console.log(jsonData);
 			postData('https://simple-server-cumz.onrender.com/api/data', jsonData)
+
 				.then(result => {
 					console.log(result)
 					statusMessage.textContent = messageFromUser.success
 				})
 				.catch(() => {
-					statusMessage.textContent = messageFromUser.fail
+					statusMessage.textContent = messageFromUser.failure
 				})
 				.finally(() => {
 					clearInputs();
