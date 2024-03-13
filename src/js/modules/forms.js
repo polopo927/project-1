@@ -11,7 +11,7 @@ const formsFeedback = () => {
 	const postData = async (url, data) => {
 		document.querySelector('.status').textContent = messageFromUser.loading;
 		//Метод fetch() в JavaScript предоставляет возможность асинхронно отправлять сетевые запросы и получать ответы.
-		let result = await fetch(url, {
+		const result = await fetch(url, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: data
@@ -45,7 +45,7 @@ const formsFeedback = () => {
 
 			//служит для отображения статуса запроса
 			//создаём переменную где будут храниться данные из формы
-			let statusMessage = document.createElement('div');
+			const statusMessage = document.createElement('div');
 			//преукрасим форму с помощью добавления стилей селектора status
 			statusMessage.classList.add('status');
 			//помещаем блок на страницу, так как сейчас она находится только в js 
@@ -57,7 +57,6 @@ const formsFeedback = () => {
 				jsonObject[key] = value;
 			});
 			const jsonData = JSON.stringify(jsonObject);
-			console.log(jsonData);
 			postData('https://simple-server-cumz.onrender.com/api/data', jsonData)
 
 				.then(result => {
