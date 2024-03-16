@@ -25,6 +25,7 @@ const modals = () => {
 			windows.forEach(window => {
 				//закрываем их
 				window.style.display = 'none'
+				document.body.style.overflow = '';
 			});
 		}
 

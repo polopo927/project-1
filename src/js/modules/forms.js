@@ -14,6 +14,7 @@ const formsFeedback = (state) => {
 		windows.forEach(window => {
 			//закрываем их
 			window.style.display = 'none'
+			document.body.style.overflow = '';
 		});
 	}
 
