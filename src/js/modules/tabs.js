@@ -1,4 +1,10 @@
-const tabsChooseBalcons = ({ headerSelector, tabSelector, contentSelector, activeClass }) => {
+const tabsChooseBalcons = ({
+	headerSelector,
+	tabSelector,
+	contentSelector,
+	activeClass,
+	display = 'block'
+}) => {
 	const header = document.querySelector(headerSelector);
 	const tabs = document.querySelectorAll(tabSelector);
 	const contents = document.querySelectorAll(contentSelector);
@@ -23,7 +29,7 @@ const tabsChooseBalcons = ({ headerSelector, tabSelector, contentSelector, activ
 	//в аргумент закидываем счётчик
 	const showTabContent = (i = 0) => {
 		//обращаемся к контенту с определённым индексом и присваевываем ему дисплей block
-		contents[i].style.display = 'block';
+		contents[i].style.display = display;
 		//обращаемся к определённому табу и добавляем ему класс активности
 		tabs[i].classList.add(activeClass);
 	}

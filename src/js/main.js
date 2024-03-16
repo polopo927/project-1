@@ -6,8 +6,13 @@ import modals from './modules/modals';
 import tabsChooseBalcons from './modules/tabs';
 //импортируем формы
 import formsFeedback from './modules/forms';
+//импортируем формы с формами окон
+import changeModalState from './modules/changeModalState';
 
 window.addEventListener('DOMContentLoaded', () => {
+	const modalState = {};
+
+	changeModalState(modalState);
 	//обязательно вызываем функцию для её работы
 	modals();
 	tabsChooseBalcons({
@@ -22,5 +27,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		contentSelector: '.decoration_content > div > div',
 		activeClass: 'after_click'
 	});
-	formsFeedback();
+	tabsChooseBalcons({
+		headerSelector: '.balcon_icons',
+		tabSelector: '.balcon_icons_img',
+		contentSelector: '.big_img > img',
+		activeClass: 'do_image_more',
+		display: 'inline-block'
+	})
+	formsFeedback(modalState);
 });

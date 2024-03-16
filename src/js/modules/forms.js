@@ -1,12 +1,21 @@
-const formsFeedback = () => {
+import checkNumInputs from './checkNumInputs'
+
+const formsFeedback = (state) => {
 	const forms = document.querySelectorAll('form');
 	const inputs = document.querySelectorAll('input');
-	const phoneNumberInputs = document.querySelectorAll('input[name="user_phone"]')
+	const windows = document.querySelectorAll('[data-modal]');
 	const messageFromUser = {
 		loading: 'Загрузка...',
 		success: 'Спасибо, скоро с Вами свяжутся',
 		failure: 'Что-то пошло не так'
 	};
+
+	const closeAllModal = () => {
+		windows.forEach(window => {
+			//закрываем их
+			window.style.display = 'none'
+		});
+	}
 
 	const postData = async (url, data) => {
 		document.querySelector('.status').textContent = messageFromUser.loading;
@@ -29,11 +38,7 @@ const formsFeedback = () => {
 		});
 	};
 
-	phoneNumberInputs.forEach(input => {
-		input.addEventListener('input', () => {
-			input.value = input.value.replace(/\D/g, '');
-		});
-	});
+	checkNumInputs('input[name="user_phone"]');
 
 	//перебираем массив с формами
 	forms.forEach(form => {
@@ -52,6 +57,11 @@ const formsFeedback = () => {
 			form.appendChild(statusMessage);
 
 			const formData = new FormData(form)
+			if (form.getAttribute('data-calc') == 'end') {
+				for (let key in state) {
+					formData.append(key, state[key]);
+				}
+			}
 			const jsonObject = {};
 			formData.forEach((value, key) => {
 				jsonObject[key] = value;
@@ -59,8 +69,7 @@ const formsFeedback = () => {
 			const jsonData = JSON.stringify(jsonObject);
 			postData('https://simple-server-cumz.onrender.com/api/data', jsonData)
 
-				.then(result => {
-					console.log(result)
+				.then(() => {
 					statusMessage.textContent = messageFromUser.success
 				})
 				.catch(() => {
@@ -70,7 +79,8 @@ const formsFeedback = () => {
 					clearInputs();
 					setTimeout(() => {
 						statusMessage.remove();
-					}, 5000);
+						closeAllModal();
+					}, 2000);
 				})
 		})
 	})
