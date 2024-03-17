@@ -1104,15 +1104,17 @@ textarea:focus {
   padding: 1rem 5rem;
 }
 
-a:focus-visible {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
 	outline: 3px solid #ffbf47;
 	outline-offset: 2px;
 }
 
-button:focus-visible {
-	outline: 3px solid #ffbf47;
-	outline-offset: 2px;
-}
+.popup_calc_profile_content .checkbox:focus-visible + .checkbox-custom {
+	box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #3a97f9;
+  }
 
 /*Media*/
 @media (max-width: 1400px) {
