@@ -8,9 +8,12 @@ import tabsChooseBalcons from './modules/tabs';
 import formsFeedback from './modules/forms';
 //импортируем формы с формами окон
 import changeModalState from './modules/changeModalState';
+//импортируем таймер
+import timer from './modules/timer';
 
 window.addEventListener('DOMContentLoaded', () => {
 	const modalState = {};
+	const deadline = '2024-03-30';
 
 	changeModalState(modalState);
 	//обязательно вызываем функцию для её работы
@@ -35,4 +38,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		display: 'inline-block'
 	})
 	formsFeedback(modalState);
+	timer('.container1', deadline)
 });
