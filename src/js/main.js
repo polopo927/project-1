@@ -1,15 +1,6 @@
 //подключаем слайдер из файла slider.js
 import './slider';
-//подключаем наше модальное окно из папки modules
-import modals from './modules/modals';
-//импортируем табы как функцию
-import tabsChooseBalcons from './modules/tabs';
-//импортируем формы
-import formsFeedback from './modules/forms';
-//импортируем формы с формами окон
-import changeModalState from './modules/changeModalState';
-//импортируем таймер
-import timer from './modules/timer';
+import {modals, tabsChooseBalcons,formsFeedback,changeModalState,timer} from './modules'
 
 window.addEventListener('DOMContentLoaded', () => {
 	const modalState = {};

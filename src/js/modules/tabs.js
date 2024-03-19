@@ -70,4 +70,4 @@ const tabsChooseBalcons = ({
 	});
 };
 
-export default tabsChooseBalcons;
+export {tabsChooseBalcons};

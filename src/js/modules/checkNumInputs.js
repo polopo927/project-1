@@ -8,4 +8,4 @@ const checkNumInputs = (inputPhone) => {
 	});
 }
 
-export default checkNumInputs
+export {checkNumInputs};

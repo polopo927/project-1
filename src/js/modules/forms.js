@@ -1,4 +1,4 @@
-import checkNumInputs from './checkNumInputs'
+import {checkNumInputs} from './index'
 
 const formsFeedback = (state) => {
 	const forms = document.querySelectorAll('form');
@@ -87,4 +87,4 @@ const formsFeedback = (state) => {
 	})
 }
 
-export default formsFeedback
+export {formsFeedback};
