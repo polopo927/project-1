@@ -1,6 +1,6 @@
-import checkNumInputs from './checkNumInputs'
+import {checkNumInputs} from './index'
 
-const formsFeedback = (state) => {
+export const formsFeedback = (state) => {
 	const forms = document.querySelectorAll('form');
 	const inputs = document.querySelectorAll('input');
 	const windows = document.querySelectorAll('[data-modal]');
@@ -87,4 +87,3 @@ const formsFeedback = (state) => {
 	})
 }
 
-export default formsFeedback
