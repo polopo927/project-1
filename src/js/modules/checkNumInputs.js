@@ -1,4 +1,4 @@
-const checkNumInputs = (inputPhone) => {
+export const checkNumInputs = (inputPhone) => {
 	const phoneNumberInputs = document.querySelectorAll(inputPhone);
 
 	phoneNumberInputs.forEach(input => {
@@ -7,5 +7,3 @@ const checkNumInputs = (inputPhone) => {
 		});
 	});
 }
-
-export {checkNumInputs};

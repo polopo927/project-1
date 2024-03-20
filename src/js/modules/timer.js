@@ -1,7 +1,7 @@
 //создаём функции которая принимает в себя 2 аргумента
 // timeSelector уникальный идентификатор куда мы будем подставлять этот таймер, возможно использовать селектор
 // deadline до какого времени у нас будет идти таймер
-const timer = (timeSelector, deadline) => {
+export const timer = (timeSelector, deadline) => {
 	const getTimeRemaining = (endtime) => {
 		// приводим всё к милисекундам и получаем разницу между концом таймера и сегодняшней датой
 		// Date.parse(endtime) получаем конец таймера в милисекундах
@@ -64,5 +64,3 @@ const timer = (timeSelector, deadline) => {
 	};
 	setClock(timeSelector, deadline);
 };
-
-export {timer};

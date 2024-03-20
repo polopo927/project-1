@@ -1,4 +1,4 @@
-const tabsChooseBalcons = ({
+ export const tabsChooseBalcons = ({
 	headerSelector,
 	tabSelector,
 	contentSelector,
@@ -69,5 +69,3 @@ const tabsChooseBalcons = ({
 		}
 	});
 };
-
-export {tabsChooseBalcons};
