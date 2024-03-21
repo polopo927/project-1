@@ -15,3 +15,4 @@ export {formsFeedback} from './forms';
 export {changeModalState} from './changeModalState';
 export {timer} from './timer'
 export {checkNumInputs} from './checkNumInputs';
+export {images} from './images'

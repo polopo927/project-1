@@ -1,6 +1,6 @@
 //подключаем слайдер из файла slider.js
 import './slider';
-import {modals, tabsChooseBalcons,formsFeedback,changeModalState,timer} from './modules'
+import {modals, tabsChooseBalcons, formsFeedback, changeModalState, timer, images} from './modules'
 
 window.addEventListener('DOMContentLoaded', () => {
 	const modalState = {};
@@ -29,5 +29,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		display: 'inline-block'
 	})
 	formsFeedback(modalState);
-	timer('.container1', deadline)
+	timer('.container1', deadline);
+	images();
 });
