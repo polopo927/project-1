@@ -35,10 +35,8 @@ export const images = () => {
 			imgPopup.style.display = 'flex';
 			//создаём переменную и получаем родителя изображения с ссылкой
 			const path = target.parentNode.getAttribute('href');
-			console.log(path)
 			//присваиваем нашему img путь к картинке который получили у родителя картинки, для открытия по ней модалки
 			bigImage.setAttribute('src', path);
-			console.log(bigImage)
 		}
 
 		//если пользователь кликнул не на изображение, а на подложку, проверяем это с помощью (совпадение)matches(который с дивом и классом попап)
