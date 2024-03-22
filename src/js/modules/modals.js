@@ -15,6 +15,7 @@ export const modals = () => {
 		const modal = document.querySelector(modalSelector);
 		const close = document.querySelector(closeSelector);
 		const windows = document.querySelectorAll('[data-modal]');
+		const scroll = calcScroll();
 		const closeModal = () => {
 			//обращаемся к модалке и скрываем её
 			modal.style.display = 'none';
@@ -27,6 +28,10 @@ export const modals = () => {
 				window.style.display = 'none'
 				document.body.style.overflow = '';
 			});
+		}
+		const deleteDivScroll = () => {
+			//убираем заменитель скролла при закрытии модалки
+			document.body.style.marginRight = 0 + 'px';
 		}
 
 		//делаем перебор элементов так как используем queryselectorall
@@ -43,6 +48,8 @@ export const modals = () => {
 				modal.style.display = 'block';
 				//блокируем прокрутку страницы когда модалка открыта
 				document.body.style.overflow = 'hidden';
+				//добавляем заменитель скролла чтобы страница не прыгала при открытии модалки
+				document.body.style.marginRight = scroll + 'px';
 				//если в css присутствуют классы для показf и скрытия, можно использовать их
 				//document.body.classList.add('modal-open')
 			});
@@ -52,6 +59,7 @@ export const modals = () => {
 		close.addEventListener('click', () => {
 			closeModal();
 			closeAllModal();
+			deleteDivScroll();
 
 			//если в css присутствуют классы для показы и скрытия, можно использовать их
 			//document.body.classList.remove('modal-open')
@@ -61,7 +69,7 @@ export const modals = () => {
 			if (event.target === modal && closeClickOverlay) {
 				closeModal();
 				closeAllModal();
-
+				deleteDivScroll();
 				//если в css присутствуют классы для показы и скрытия, можно использовать их
 				//document.body.classList.remove('modal-open')
 			}
@@ -76,6 +84,31 @@ export const modals = () => {
 			//блокируем прокрутку страницы когда модалка открыта
 			document.body.style.overflow = 'hidden';
 		}, time);
+	}
+
+	//создаём функцию которая при вызове модалок будет скрывать скролл станицы, чтобы она не прыгала
+	const calcScroll = () => {
+		//создаём див для того чтобы положить туда отступ который будет идентичен скроллу
+		const div = document.createElement('div');
+
+		//задаём ему ширину, высоту, скролл если элемент больше странциы и скрываем его
+		div.style.width = '50px';
+		div.style.height = '50px';
+		div.style.overflowY = 'scroll';
+		div.style.visibility = 'hidden';
+
+		//пушим его в конец родителя
+		document.body.appendChild(div);
+
+		//вычисляем его ширину скролла
+		//offsetWidth - ширина с прокруткой
+		//clientWidth - ширина без прокрутки
+		const scrollWidth = div.offsetWidth - div.clientWidth;
+		//после получения ширины скролла, удаляем див
+		div.remove();
+
+		//вытаскиваем ширину скролла
+		return scrollWidth;
 	}
 
 	bindModal({
